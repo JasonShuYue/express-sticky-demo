@@ -1,4 +1,5 @@
-let b = require('../mod/b');
+let toast = require('mod/toast').Toast;
 
 
-console.log(b)
+toast('hello111111!', 1555000)
+

@@ -17,5 +17,17 @@ module.exports = {
                 "sass-loader" // compiles Sass to CSS, using Node Sass by default
             ]
         }]
-    }
+    },
+    resolve: {
+        alias: {
+            jquery: path.join(__dirname, 'js/lib/jquery-2.0.3.min'),
+            mod: path.join(__dirname, 'js/mod'),
+            sass: path.join(__dirname, 'css')
+        }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery'
+        })
+    ]
 };
