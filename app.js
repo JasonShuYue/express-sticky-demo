@@ -20,10 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/css/style.css', function(req, res, next) {
-  console.log('get s tyle..................')
-
-});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

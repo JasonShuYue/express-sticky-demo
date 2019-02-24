@@ -1,33 +1,37 @@
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = {
     entry: path.resolve(__dirname, './js/app/index.js'),
     output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, '../public/js')
+        filename: 'js/index.js',
+        path: path.resolve(__dirname, '../public')
     },
 
     module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [
-                "style-loader", // creates style nodes from JS strings
-                "css-loader", // translates CSS into CommonJS
-                "sass-loader" // compiles Sass to CSS, using Node Sass by default
-            ]
-        }]
+        rules: [
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
+            }
+        ]
     },
     resolve: {
         alias: {
             jquery: path.join(__dirname, 'js/lib/jquery-2.0.3.min'),
             mod: path.join(__dirname, 'js/mod'),
-            sass: path.join(__dirname, 'css')
+            sass: path.join(__dirname, 'sass')
         }
     },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery'
-        })
+        }),
+        new ExtractTextPlugin('css/index.css'),
     ]
 };
