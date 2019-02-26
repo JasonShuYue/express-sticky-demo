@@ -1,15 +1,17 @@
-function eventHub() {
+var eventHub = (function() {
 
     let events = {};
 
-    function emit(eventName, fn) {
+    // 订阅
+    function on(eventName, fn) {
         if(!(eventName in events)) {
             events[eventName] = [];
         }
         events[eventName].push(fn);
     }
 
-    function on(eventName, data) {
+    // 发布模式
+    function emit(eventName, data) {
         let fnList = events[eventName];
         fnList.map(fn => {
             fn.call(null, data);
@@ -18,8 +20,8 @@ function eventHub() {
 
     return {
         emit: emit,
-        on: on
+        on: on,
     };
-}
+})();
 
 module.exports = eventHub;

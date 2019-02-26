@@ -1,4 +1,4 @@
-let WaterFall = (function() {
+let Waterfall = (function() {
     var $ct;
     var $items;
     function render($c) {
@@ -49,4 +49,4 @@ let WaterFall = (function() {
     }
 })();
 
-module.exports = WaterFall;
+module.exports = Waterfall;
