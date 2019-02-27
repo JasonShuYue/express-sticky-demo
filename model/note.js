@@ -15,6 +15,9 @@ const Note = sequelize.define('note', {
     content: {
         type: Sequelize.STRING
     },
+    uid: {
+        type: Sequelize.STRING
+    }
 });
 
 // 测试数据库连接
@@ -28,10 +31,11 @@ const Note = sequelize.define('note', {
 //     });
 
 
-// 测试数据创建和获取
+// // 测试数据创建和获取
 // Note.sync().then(function() {
 //     Note.create({
-//         content: 'hello world!'
+//         content: 'hello world!',
+//         uid: '123'
 //     })
 // }).then(function() {
 //     Note.findAll({raw: true}).then(function(notes) {

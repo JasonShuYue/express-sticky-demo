@@ -13,6 +13,7 @@ Note.prototype = {
 
     defaultOpts: {
         id: '',
+        uid: '',
         $ct: $('#content').length > 0 ? $('#content') : $('body'),
         content: 'input here', // Note的内容
     },

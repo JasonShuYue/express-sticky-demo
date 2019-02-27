@@ -6,13 +6,11 @@ var router = express.Router();
 
 passport.serializeUser(function(user, done) {
     console.log('---serializeUser---')
-    console.log(user)
     done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
     console.log('---deserializeUser---')
-    console.log(obj)
     done(null, obj);
 });
 
@@ -29,6 +27,10 @@ passport.use(new GitHubStrategy({
     }
 ));
 
+router.get('/logout', function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
+})
 
 router.get('/github',
     passport.authenticate('github'));
@@ -36,8 +38,6 @@ router.get('/github',
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     function(req, res) {
-        console.log('success!!!!!!!!!!!!!!!!!!!!!')
-        console.log(req.user)
         req.session.user = {
             id: req.user.id,
             username: req.user.displayName || req.user.username,
