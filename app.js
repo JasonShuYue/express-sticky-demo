@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var api = require('./routes/api');
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -19,10 +22,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// passport
+// app.use(session({secret: 'sessionsecret'}));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
 
 
 app.use('/', indexRouter);
 app.use('/api', api);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
