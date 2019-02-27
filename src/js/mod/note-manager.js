@@ -17,7 +17,7 @@ var NoteManager = (function() {
                             username: article.username
                         });
                     });
-                    eventHub.fire('waterfall');
+                    eventHub.emit('waterfall');
                 }else{
                     Toast(ret.errorMsg);
                 }
